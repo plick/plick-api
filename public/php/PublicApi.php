@@ -27,7 +27,7 @@ final class PublicApi {
 	 * @var string
 	 * @access private
 	 */
-	private $endpoint = 'plickmail.com/api/';
+	private $endpoint = 'plickmail.com/api/'; 
 
 	/**
 	 * The API version

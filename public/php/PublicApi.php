@@ -3,7 +3,7 @@
  * Plick Public API Class
  * @author Owen Hardman <support@plick.com>
  * @copyright Plick Pty Ltd 2013
- * @version 1.0
+ * @version 1.1
  */
 namespace Plick;
 // {{{ Plick\PublicApi

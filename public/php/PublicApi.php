@@ -1,16 +1,4 @@
 <?php
-/*
-
-Examples:
-require('PublicApi.php');
-$plick = new Plick\PublicApi();
-var_dump($plick->info());
-var_dump($plick->database('ca64c60d7dd2e20ef33de713e0ec8c50'));
-var_dump($plick->database('ca64c60d7dd2e20ef33de713eaaaaaaa'));
-var_dump($plick->contact('ca64c60d7dd2e20ef33de713e0ec8c50','test@test.com'));
-var_dump($plick->contact('ca64c60d7dd2e20ef33de713e0ec8c50','adsfadsf'));
-
-*/
 /**
  * Plick Public API Class
  * @author Owen Hardman <support@plick.com>
@@ -27,7 +15,7 @@ final class PublicApi {
 	 * @var string
 	 * @access private
 	 */
-	private $endpoint = 'plickmail.com/api/'; 
+	private $endpoint = 'plickmail.com/api/';
 
 	/**
 	 * The API version
@@ -45,7 +33,7 @@ final class PublicApi {
 	 * @var string
 	 * @access public
 	 */
-	public $access_code = '5f4dcc3b5aa765d61d8327deb882cf99';
+	public $access_code = '<YOU API CODE>';
 
 	/**
 	 * API access password | This is generated under Settings > Developers
@@ -55,7 +43,7 @@ final class PublicApi {
 	 * @var string
 	 * @access public
 	 */
-	public $access_pass = '5f4dcc3b5aa765d61d8327deb882cf99';
+	public $access_pass = '<YOUR API PASSWORD>';
 
 	/**
 	 * How you would like data returned

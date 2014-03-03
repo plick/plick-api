@@ -33,7 +33,7 @@ final class PublicApi {
 	 * @var string
 	 * @access public
 	 */
-	public $access_code = '<YOU API CODE>';
+	public $access_code = '<YOUR_API_CODE>';
 
 	/**
 	 * API access password | This is generated under Settings > Developers
@@ -43,7 +43,7 @@ final class PublicApi {
 	 * @var string
 	 * @access public
 	 */
-	public $access_pass = '<YOUR API PASSWORD>';
+	public $access_pass = '<YOUR_API_PASSWORD>';
 
 	/**
 	 * How you would like data returned

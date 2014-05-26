@@ -3,7 +3,7 @@
  * Plick Public API Class
  * @author Owen Hardman <support@plick.com>
  * @copyright Plick Pty Ltd 2013
- * @version 1.1
+ * @version 1.2
  */
 namespace Plick;
 // {{{ Plick\PublicApi
@@ -15,7 +15,7 @@ final class PublicApi {
 	 * @var string
 	 * @access private
 	 */
-	private $endpoint = 'plickmail.com/api/';
+	private $endpoint = 'api.plickmail.com/';
 
 	/**
 	 * The API version
@@ -95,8 +95,9 @@ final class PublicApi {
 	 * @throws \Exception
 	 * @throws Plick\PublicApiException
 	 */
-	public function info($type = 'full') {
+	public function info($type = 'full') { 
 		if(!in_array($type,array('full','short'))){
+			
 			throw new PublicApiException('Your info type does not match \'full\', \'short\': '.$type);
 			return false;
 		}
@@ -361,6 +362,8 @@ final class PublicApi {
 		 * Again catch in case of a crazy old PHP which doesn't support it
 		 */
 		try {
+			curl_setopt ( $curl_session, CURLOPT_SSL_VERIFYHOST, 0);
+			curl_setopt ( $curl_session, CURLOPT_SSL_VERIFYPEER, 0);
 			curl_setopt ( $curl_session, CURLOPT_FORBID_REUSE, TRUE );
 			curl_setopt ( $curl_session, CURLOPT_FRESH_CONNECT, TRUE );
 			curl_setopt ( $curl_session, CURLOPT_HEADER, TRUE );
@@ -381,6 +384,7 @@ final class PublicApi {
 			throw new \Exception ( 'Failed to execute cURL: ' . $phpException->getMessage (), $phpException->getCode () );
 			return FALSE;
 		}
+
 		unset ( $url, $curl_session );
 
 		/**
@@ -389,6 +393,7 @@ final class PublicApi {
 		 */
 		preg_match ( '/HTTP\/1\.1 (\d{3})/', $curl_response, $matches );
 		$http_response = $matches [1];
+		
 		unset ( $matches );
 		if ($http_response != "200") {
 			throw new PublicApiException ( 'Plick API returned a HTTP status code other than 200: ' . $http_response );
@@ -414,7 +419,7 @@ final class PublicApi {
 	 * @return string
 	 */
 	protected function buildBaseUrl($action = '') {
-		return 'http://' . trim ( str_replace ( '//', '/', $this->endpoint . '/' . $this->version . '/' . $action ) );
+		return 'https://' . trim ( str_replace ( '//', '/', $this->endpoint . '/' . $this->version . '/' . $action ) );
 	}
 
 	// }}}

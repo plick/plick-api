@@ -3,7 +3,7 @@
  * Plick Public API Class
  * @author Owen Hardman <support@plick.com>
  * @copyright Plick Pty Ltd 2013
- * @version 1.2
+ * @version 1.3
  */
 namespace Plick;
 // {{{ Plick\PublicApi
@@ -71,7 +71,7 @@ final class PublicApi {
 
 	// }}}
 	// {{{ Public Methods
-	// {{{ -> info($type)
+	// {{{ -> AccountOverview($type)
 
 	/**
 	 * Retrieve an information listing on the Plick account
@@ -80,7 +80,7 @@ final class PublicApi {
 	 * <code>
 	 * $plick = new Plick\PublicApi();
 	 * try{
-	 *   $info = $plick->info();
+	 *   $info = $plick->AccountOverview();
 	 * } catch (Plick\PublicApiException $e){
 	 *   // Problem exists in configuration;
 	 * } catch (Exception $e) {
@@ -95,7 +95,7 @@ final class PublicApi {
 	 * @throws \Exception
 	 * @throws Plick\PublicApiException
 	 */
-	public function info($type = 'full') { 
+	public function AccountOverview($type = 'full') { 
 		if(!in_array($type,array('full','short'))){
 			
 			throw new PublicApiException('Your info type does not match \'full\', \'short\': '.$type);
@@ -113,7 +113,7 @@ final class PublicApi {
 			}
 		}
 
-		$url = $this->buildBaseUrl ( 'info' ) . '?type=' . $type . '&hash=' . $this->token;
+		$url = $this->buildBaseUrl ( 'AccountOverview' ) . '?type=' . $type . '&hash=' . $this->token;
 
 		try{
 			$data = $this->callUrl($url);
@@ -133,7 +133,7 @@ final class PublicApi {
 	}
 
 	// }}}
-	// {{{ -> database($dbid)
+	// {{{ -> GetDatabaseInfo($dbid)
 
 	/**
 	 * Retrieve a listing on the Plick database $dbid
@@ -142,7 +142,7 @@ final class PublicApi {
 	 * <code>
 	 * $plick = new Plick\PublicApi();
 	 * try{
-	 *   $database = $plick->database('your-database-guid');
+	 *   $database = $plick->GetDatabaseInfo('your-database-guid');
 	 * } catch (Plick\PublicApiException $e){
 	 *   // Problem exists in configuration;
 	 * } catch (Exception $e) {
@@ -156,7 +156,7 @@ final class PublicApi {
 	 * @throws \Exception
 	 * @throws Plick\PublicApiException
 	 */
-	public function database($dbid) {
+	public function GetDatabaseInfo($dbid) {
 		if(strlen($dbid) != 32){
 			throw new PublicApiException('Your database ID fails typecheck: '.$dbid);
 			return false;
@@ -173,7 +173,7 @@ final class PublicApi {
 			}
 		}
 
-		$url = $this->buildBaseUrl ( 'database' ) . '?database_id=' . $dbid . '&hash=' . $this->token;
+		$url = $this->buildBaseUrl ( 'GetDatabaseInfo' ) . '?database_id=' . $dbid . '&hash=' . $this->token;
 
 		try{
 			$data = $this->callUrl($url);
@@ -191,9 +191,38 @@ final class PublicApi {
 			return FALSE;
 		}
 	}
+	
+	// }}}
+	// {{{ -> AddContact($email,$dbid)
+
+	/**
+	 * Retrieve a listing on the Plick database $dbid
+	 *
+	 * Example:
+	 * <code>
+	 * $plick = new Plick\PublicApi();
+	 * try{
+	 *   $database = $plick->AddContact($email,$dbid);
+	 * } catch (Plick\PublicApiException $e){
+	 *   // Problem exists in configuration;
+	 * } catch (Exception $e) {
+	 *   // Generic PHP problem
+	 * }
+	 * // Carry on
+	 * </code>
+	 *
+	 * @access public
+	 * @param $dbid string	Database ID
+	 * @param $email string Email address to add
+	 * @throws \Exception
+	 * @throws Plick\PublicApiException
+	 */
+	public function AddContact($dbid,$email){
+		echo "Method not implemented yet."
+	} 
 
 	// }}}
-	// {{{ -> contact($dbid, $email)
+	// {{{ -> FindContact($dbid, $email)
 
 	/**
 	 * (Attempt to) fish out $email from Plick database $dbid
@@ -202,7 +231,7 @@ final class PublicApi {
 	 * <code>
 	 * $plick = new Plick\PublicApi();
 	 * try{
-	 *   $database = $plick->database('your-database-guid');
+	 *   $database = $plick->FindContact('your-database-guid','email-to-find);
 	 * } catch (Plick\PublicApiException $e){
 	 *   // Problem exists in configuration;
 	 * } catch (Exception $e) {
@@ -217,7 +246,7 @@ final class PublicApi {
 	 * @throws \Exception
 	 * @throws Plick\PublicApiException
 	 */
-	public function contact($dbid, $email) {
+	public function FindContact($dbid, $email) {
 		if(strlen($dbid) != 32){
 			throw new PublicApiException('Your database ID fails typecheck: '.$dbid);
 			return false;
@@ -238,7 +267,7 @@ final class PublicApi {
 			}
 		}
 
-		$url = $this->buildBaseUrl ( 'contact' ) . '?database_id=' . $dbid . '&email='.$email.'&hash=' . $this->token;
+		$url = $this->buildBaseUrl ( 'FindContact' ) . '?database_id=' . $dbid . '&email='.$email.'&hash=' . $this->token;
 
 		try{
 			$data = $this->callUrl($url);
@@ -275,7 +304,7 @@ final class PublicApi {
 		 *
 		 * @var string
 		 */
-		$url = $this->buildBaseUrl ( 'login' ) . '?access_code=' . $this->access_code . '&access_password=' . $this->access_pass;
+		$url = $this->buildBaseUrl ( 'Auth' ) . '?access_code=' . $this->access_code . '&access_password=' . $this->access_pass;
 
 		/**
 		 * Retrieve our URL payload

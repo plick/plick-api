@@ -5,7 +5,7 @@
  * @copyright Plick Pty Ltd 2013
  * @version 1.2
  */
-namespace Plick;  
+namespace Plick;
 // {{{ Plick\PublicApi
 final class PublicApi {
 	// {{{ Configuration
